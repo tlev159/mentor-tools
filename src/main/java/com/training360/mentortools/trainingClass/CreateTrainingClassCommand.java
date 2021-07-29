@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@IsEndAfterStart
 public class CreateTrainingClassCommand {
 
     @NotBlank
