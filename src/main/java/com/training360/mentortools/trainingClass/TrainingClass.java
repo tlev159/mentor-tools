@@ -1,19 +1,19 @@
 package com.training360.mentortools.trainingClass;
 
-import com.training360.mentortools.student.Student;
+import com.training360.mentortools.registration.Registration;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "training_classes")
 public class TrainingClass {
 
     @Id
@@ -26,21 +26,13 @@ public class TrainingClass {
 
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trainingClass")
-    private List<Student> students;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Registration> registrations;
 
     public TrainingClass(String name, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    public void addStudent(Student student) {
-        if (students == null) {
-            students = new ArrayList<>();
-        }
-        students.add(student);
-        student.setTrainingClass(this);
     }
 
 }
