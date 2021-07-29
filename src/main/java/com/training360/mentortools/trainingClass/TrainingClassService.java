@@ -27,5 +27,10 @@ public class TrainingClassService {
                 .collect(Collectors.toList());
     }
 
+    public TrainingClassDTO findClass(long id) {
+        return modelMapper.map(repository.findById(id)
+                .orElseThrow(() -> new TrainingClassNotFoundException("Cannot find Class!")), TrainingClassDTO.class);
+    }
+
 
 }

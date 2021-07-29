@@ -1,3 +1,31 @@
+GET http://localhost:8080/api/5
+Accept: application/json
+
+<> 2021-07-29T131525.404.json
+
+###
+
+GET http://localhost:8080/api/5
+Accept: application/json
+
+<> 2021-07-29T130438.500.json
+
+###
+
+GET http://localhost:8080/api/3
+Accept: application/json
+
+<> 2021-07-29T130419.200.json
+
+###
+
+GET http://localhost:8080/api/1
+Accept: application/json
+
+<> 2021-07-29T130412.200.json
+
+###
+
 GET http://localhost:8080/api
 Accept: application/json
 
