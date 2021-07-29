@@ -1,6 +1,7 @@
 package com.training360.mentortools.trainingClass;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,4 +23,10 @@ public class TrainingClassController {
         return service.createTrainingClass(command);
     }
 
+    @GetMapping
+    @Operation(summary = "List all classes", description = "List all classes")
+    @ApiResponse(responseCode = "404", description = "Classes not found!")
+    public List<TrainingClassDTO> listAllClasses() {
+        return service.listAllClasses();
+    }
 }

@@ -1,0 +1,15 @@
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "First class",
+  "startDate": "2021-06-01",
+  "endDate": "2021-08-02"
+
+}
+
+###
+GET http://localhost:8080/api
+Accept: application/json
+
+###

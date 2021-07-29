@@ -1,0 +1,378 @@
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-29T113318.200.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "First class",
+  "startDate": "2021-06-01",
+  "endDate": "2021-08-02"
+
+}
+
+<> 2021-07-29T113306.200.json
+
+###
+
+PUT http://localhost:8080/api/2/end
+Content-Type: application/json
+
+{
+  "endDate": "2021-01-20"
+}
+
+<> 2021-07-28T233857.500.json
+
+###
+
+PUT http://localhost:8080/api/2/end
+Content-Type: application/json
+
+{
+  "endDate": "2021-01-20"
+}
+
+<> 2021-07-28T233701.500.json
+
+###
+
+PUT http://localhost:8080/api/2/start
+Content-Type: application/json
+
+{
+  "startDate": "2021-02-01"
+}
+
+<> 2021-07-28T233650.200.json
+
+###
+
+PUT http://localhost:8080/api/2/end
+Content-Type: application/json
+
+{
+  "endDate": "2021-01-20"
+}
+
+<> 2021-07-28T233311.200.json
+
+###
+
+PUT http://localhost:8080/api/2/start
+Content-Type: application/json
+
+{
+  "startDate": "2021-02-01"
+}
+
+<> 2021-07-28T233301.200.json
+
+###
+
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-28T232703.200.json
+
+###
+
+PUT http://localhost:8080/api/2/name
+Content-Type: application/json
+
+{
+  "name": "Haladókák"
+}
+
+<> 2021-07-28T232647.200.json
+
+###
+
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-28T232525.200.json
+
+###
+
+PUT http://localhost:8080/api/2/name
+Content-Type: application/json
+
+{
+  "name": "Haladókák"
+}
+
+<> 2021-07-28T232459.200.json
+
+###
+
+PUT http://localhost:8080/api/name/2
+Content-Type: application/json
+
+{
+  "name": "Haladókák"
+}
+
+<> 2021-07-28T232415.200.json
+
+###
+
+POST http://localhost:8080/api/2/name
+Content-Type: application/json
+
+{
+  "name": "Haladókák"
+}
+
+<> 2021-07-28T232226.405.json
+
+###
+
+GET http://localhost:8080/api/1
+Accept: application/json
+
+<> 2021-07-28T231512.200.json
+
+###
+
+GET http://localhost:8080/api/2
+Accept: application/json
+
+<> 2021-07-28T231453.200.json
+
+###
+
+GET http://localhost:8080/api/Struk
+Accept: application/json
+
+<> 2021-07-28T230836.200.json
+
+###
+
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-28T230830.200.json
+
+###
+
+GET http://localhost:8080/api/Struk
+Accept: application/json
+
+<> 2021-07-28T230635.200.json
+
+###
+
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-28T224415.200.json
+
+###
+
+GET http://localhost:8080/api/Struk
+Accept: application/json
+
+<> 2021-07-28T224318.200.json
+
+###
+
+GET http://localhost:8080/api/Struk
+Accept: application/json
+
+<> 2021-07-28T224050.200.json
+
+###
+
+GET http://localhost:8080/api/adó
+Accept: application/json
+
+<> 2021-07-28T224026.200.json
+
+###
+
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-28T224003.200.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Haladó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-03"
+}
+
+<> 2021-07-28T215624.200.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Haladó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-03"
+}
+
+<> 2021-07-28T215409.200.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Haladó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-03"
+}
+
+<> 2021-07-28T215315.500.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Haladó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-03"
+}
+
+<> 2021-07-28T212706.500.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Haladó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-03"
+}
+
+<> 2021-07-28T212537.500.json
+
+###
+
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-28T212445.500.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Haladó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-03"
+}
+
+<> 2021-07-28T212418.500.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Struktúraváltó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-03"
+}
+
+<> 2021-07-28T212402.500.json
+
+###
+
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-28T212229.200.json
+
+###
+
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-28T212036.200.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Struktúraváltó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-03"
+}
+
+<> 2021-07-28T212032.200.json
+
+###
+
+GET http://localhost:8080/api
+Accept: application/json
+
+<> 2021-07-28T212021.200.json
+
+###
+
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Struktúraváltó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-01"
+}
+
+<> 2021-07-28T211957.400.json
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+  "name": "Struktúraváltó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-02"
+}
+
+<> 2021-07-28T211943.200.json
+
+###
+
+POST http://localhost:80/api/item
+Content-Type: application/json
+
+{
+  "name": "Struktúraváltó",
+  "startDate": "2021-01-01",
+  "endDate": "2021-01-02"
+}
+
+###
+

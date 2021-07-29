@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Service
 public class TrainingClassService {
@@ -17,5 +20,12 @@ public class TrainingClassService {
         repository.save(trainingClass);
         return modelMapper.map(trainingClass, TrainingClassDTO.class);
     }
+
+    public List<TrainingClassDTO> listAllClasses() {
+        return repository.findAll().stream()
+                .map(c -> modelMapper.map(c, TrainingClassDTO.class))
+                .collect(Collectors.toList());
+    }
+
 
 }
