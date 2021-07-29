@@ -43,6 +43,11 @@ public class TrainingClassController {
         return service.findClass(id);
     }
 
+    @PutMapping("/trainingclass/{id}")
+    public TrainingClassDTO updateTrainingClass(@PathVariable("id") long id, @Valid @RequestBody UpdateTrainingClassCommand command) {
+        return service.updateTrainingClass(id, command);
+    }
+
     @ExceptionHandler(TrainingClassNotFoundException.class)
     public ResponseEntity<Problem> handleNotFound(TrainingClassNotFoundException tcnfe) {
         Problem problem = Problem.builder()

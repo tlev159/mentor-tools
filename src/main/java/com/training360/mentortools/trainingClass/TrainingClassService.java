@@ -3,6 +3,7 @@ package com.training360.mentortools.trainingClass;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,5 +33,12 @@ public class TrainingClassService {
                 .orElseThrow(() -> new TrainingClassNotFoundException("Cannot find Class!")), TrainingClassDTO.class);
     }
 
-
+    @Transactional
+    public TrainingClassDTO updateTrainingClass(long id, UpdateTrainingClassCommand command) {
+        TrainingClass trainingClass = repository.findById(id).orElseThrow(() -> new TrainingClassNotFoundException("Training class with id (" + id + ") not found!"));
+        trainingClass.setName(command.getName());
+        trainingClass.setStartDate(command.getStartDate());
+        trainingClass.setEndDate(command.getEndDate());
+        return modelMapper.map(trainingClass, TrainingClassDTO.class);
+    }
 }
