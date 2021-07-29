@@ -40,4 +40,8 @@ public class StudentService {
         student.setDescription(command.getDescription());
         return modelMapper.map(student, StudentDTO.class);
     }
+
+    public void deleteStudentById(long id) {
+        repository.deleteById(id);
+    }
 }

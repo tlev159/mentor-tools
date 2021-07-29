@@ -71,5 +71,29 @@ public class StudentRestTemplateIT {
 
     }
 
+    @Test
+    public void createTwoDeleteOneByIdThenNotFindStudentById() {
+
+        StudentDTO studentDTO =
+                template.postForObject("/api/students", new CreateStudentCommand("Minta Eszter", "minta.eszter@gmail.com", "mintaE", ""), StudentDTO.class);
+
+        long id = studentDTO.getId();
+
+        template.postForObject("/api/students", new CreateStudentCommand("Minta Fruzsina", "minta.fruzsina@gmail.com", "mintaF", ""), StudentDTO.class);
+
+        template.delete("/api/students/" + id);
+
+        List<StudentDTO> studentDTOS = template.exchange("/api/students",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<StudentDTO>>() {
+                }).getBody();
+
+        assertThat(studentDTOS)
+                .hasSize(1)
+                .extracting(StudentDTO::getName)
+                .containsExactly("Minta Fruzsina");
+
+    }
 
 }

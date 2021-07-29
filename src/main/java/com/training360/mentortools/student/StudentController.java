@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -34,8 +35,14 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public StudentDTO updateStudentById(@PathVariable("id") long id, UpdateStudentCommand command) {
+    public StudentDTO updateStudentById(@PathVariable("id") long id, @Valid @RequestBody UpdateStudentCommand command) {
         return service.updateStudentById(id, command);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteStudentById(@PathVariable("id") long id) {
+        service.deleteStudentById(id);
+    }
+
 
 }
