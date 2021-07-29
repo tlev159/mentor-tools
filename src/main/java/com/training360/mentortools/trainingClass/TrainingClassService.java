@@ -12,4 +12,10 @@ public class TrainingClassService {
 
     private TrainingClassRepository repository;
 
+    public TrainingClassDTO createTrainingClass(CreateTrainingClassCommand command) {
+        TrainingClass trainingClass = new TrainingClass(command.getName(), command.getStartDate(), command.getEndDate());
+        repository.save(trainingClass);
+        return modelMapper.map(trainingClass, TrainingClassDTO.class);
+    }
+
 }
