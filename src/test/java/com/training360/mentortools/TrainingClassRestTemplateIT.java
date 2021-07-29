@@ -17,7 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(statements = "delete from `mentor-tools`.`training_class`")
+@Sql(statements = "delete from `mentor-tools`.`training_classes`")
 public class TrainingClassRestTemplateIT {
 
     @Autowired
