@@ -3,6 +3,7 @@ package com.training360.mentortools.student;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,4 +27,17 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
+    public StudentDTO findStudentById(long id) {
+        return modelMapper.map(repository.findById(id).orElseThrow(() -> new StudentNotFoundException("Student(s) not found")), StudentDTO.class);
+    }
+
+    @Transactional
+    public StudentDTO updateStudentById(long id, UpdateStudentCommand command) {
+        Student student = repository.findById(id).orElseThrow(() -> new StudentNotFoundException("Student with id (" + id + ") not found!"));
+        student.setName(command.getName());
+        student.setEmail(command.getEmail());
+        student.setGitUsername(command.getGitUsername());
+        student.setDescription(command.getDescription());
+        return modelMapper.map(student, StudentDTO.class);
+    }
 }

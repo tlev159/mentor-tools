@@ -45,4 +45,28 @@ public class StudentRestTemplateIT {
 
     }
 
+    @Test
+    public void createUpdateThenFindById() {
+
+        StudentDTO studentDTO =
+                template.postForObject("/api/students", new CreateStudentCommand("Minta Eszter", "minta.eszter@gmail.com", "mintaE", ""), StudentDTO.class);
+
+        assertThat(studentDTO).extracting(StudentDTO::getName)
+                .isEqualTo("Minta Eszter");
+
+        template.postForObject("/api/students", new CreateStudentCommand("Minta Fruzsina", "minta.fruzsina@gmail.com", "mintaF", ""), StudentDTO.class);
+
+        List<StudentDTO> studentDTOS = template.exchange("/api/students",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<StudentDTO>>() {
+                }).getBody();
+
+        assertThat(studentDTOS)
+                .hasSize(2)
+                .extracting(StudentDTO::getName)
+                .containsExactly("Minta Eszter", "Minta Fruzsina");
+
+    }
+
 }
