@@ -68,4 +68,30 @@ public class TrainingClassRestTemplateIT {
 
     }
 
+    @Test
+    public void deleteThenNotFindClassById() {
+
+        TrainingClassDTO trainingClassDTO =
+                template.postForObject("/api", new CreateTrainingClassCommand("First Test Class", LocalDate.of(2021, 01, 01), LocalDate.of(2021, 03, 01)), TrainingClassDTO.class);
+
+        long id = trainingClassDTO.getId();
+
+        template.postForObject("/api", new CreateTrainingClassCommand("Second Test Class", LocalDate.of(2021, 02, 02), LocalDate.of(2021, 04, 04)), TrainingClassDTO.class);
+
+        template.delete("/api/trainingclass/" + id);
+
+        List<TrainingClassDTO> trainingClassDTOS = template.exchange("/api",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<TrainingClassDTO>>() {
+                }).getBody();
+
+        assertThat(trainingClassDTOS)
+                .hasSize(1)
+                .extracting(TrainingClassDTO::getName)
+                .doesNotContainSequence("First Test Class")
+                .containsExactly("Second Test Class");
+
+    }
+
 }

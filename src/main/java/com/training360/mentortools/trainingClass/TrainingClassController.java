@@ -44,9 +44,18 @@ public class TrainingClassController {
     }
 
     @PutMapping("/trainingclass/{id}")
+    @Operation(summary = "Update training class", description = "Update training class")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public TrainingClassDTO updateTrainingClass(@PathVariable("id") long id, @Valid @RequestBody UpdateTrainingClassCommand command) {
         return service.updateTrainingClass(id, command);
     }
+
+    @DeleteMapping("/trainingclass/{id}")
+    @Operation(summary = "Delete training class by id", description = "Delete training class by id")
+    public void deleteTrainingClassById(@PathVariable("id") long id) {
+        service.deleteTrainingClassById(id);
+    }
+
 
     @ExceptionHandler(TrainingClassNotFoundException.class)
     public ResponseEntity<Problem> handleNotFound(TrainingClassNotFoundException tcnfe) {

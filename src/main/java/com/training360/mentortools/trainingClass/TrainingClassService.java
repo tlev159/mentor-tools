@@ -41,4 +41,8 @@ public class TrainingClassService {
         trainingClass.setEndDate(command.getEndDate());
         return modelMapper.map(trainingClass, TrainingClassDTO.class);
     }
+
+    public void deleteTrainingClassById(long id) {
+        repository.deleteById(id);
+    }
 }
