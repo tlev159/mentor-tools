@@ -1,11 +1,14 @@
 package com.training360.mentortools.student;
 
+import com.training360.mentortools.registration.Registration;
+import com.training360.mentortools.registration.RegistrationRepository;
 import com.training360.mentortools.trainingClass.TrainingClass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,9 +27,6 @@ public class Student {
     private String gitUsername;
 
     private String description;
-
-    @ManyToOne
-    private TrainingClass trainingClass;
 
     public Student(String name, String email, String gitUsername, String description) {
         this.name = name;
