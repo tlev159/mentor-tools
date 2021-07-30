@@ -8,6 +8,6 @@ CREATE TABLE `registrations` (
 );
 
 
-#INSERT INTO registrations (status, student_id, training_class_id) VALUES ('Active', 1, 2);
-#INSERT INTO registrations (status, student_id, training_class_id) VALUES ('Exit_In_Progress', 2, 2);
-#INSERT INTO registrations (status, student_id, training_class_id) VALUES ('Exit', 3, 1);
+INSERT INTO registrations (status, student_id, training_class_id) VALUES ('Active', 1, 2);
+INSERT INTO registrations (status, student_id, training_class_id) VALUES ('Exit_In_Progress', 2, 2);
+INSERT INTO registrations (status, student_id, training_class_id) VALUES ('Exit', 3, 1);
