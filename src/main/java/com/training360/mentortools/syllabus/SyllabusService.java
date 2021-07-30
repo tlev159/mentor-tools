@@ -36,4 +36,12 @@ public class SyllabusService {
                 .filter(s -> name.isEmpty() || s.getName().equalsIgnoreCase(name.get()))
                 .map(s -> modelMapper.map(s, SyllabusDTO.class)).collect(Collectors.toList());
     }
+
+    @Transactional
+    public SyllabusDTO updateSyllabus(Long id, UpdateSyllabusCommand command) {
+        Syllabus syllabus = repository.findById(id).orElseThrow(() -> new SyllabusNotFoundException("Syllabus not found!"));
+        syllabus.setName(command.getName());
+        return modelMapper.map(syllabus, SyllabusDTO.class);
+    }
+
 }
