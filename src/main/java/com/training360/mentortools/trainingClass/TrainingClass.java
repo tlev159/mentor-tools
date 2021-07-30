@@ -33,6 +33,7 @@ public class TrainingClass {
     private List<Registration> registrations;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "syllabus_id")
     private Syllabus syllabus;
 
     public TrainingClass(String name, LocalDate startDate, LocalDate endDate) {
