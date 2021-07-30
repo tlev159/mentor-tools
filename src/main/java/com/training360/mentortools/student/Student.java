@@ -1,11 +1,14 @@
 package com.training360.mentortools.student;
 
 import com.training360.mentortools.registration.Registration;
+
+import com.training360.mentortools.trainingClass.TrainingClass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -24,11 +27,13 @@ public class Student {
 
     private String email;
 
+    @Column(name = "github_username")
     private String gitUsername;
 
     private String description;
 
-    @ManyToMany
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "students")
     private List<Registration> registrations;
 
     public Student(String name, String email, String gitUsername, String description) {
@@ -44,4 +49,13 @@ public class Student {
         this.gitUsername = command.getGitUsername();
         this.description = command.getDescription();
     }
+
+    public void addRegistration(Registration registration) {
+        if (registrations == null) {
+            registrations = new ArrayList<>();
+        }
+        registrations.add(registration);
+        registration.setStudent(this);
+    }
+
 }

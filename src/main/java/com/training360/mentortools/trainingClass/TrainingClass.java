@@ -1,12 +1,14 @@
 package com.training360.mentortools.trainingClass;
 
 import com.training360.mentortools.registration.Registration;
+import com.training360.mentortools.student.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -26,13 +28,21 @@ public class TrainingClass {
 
     private LocalDate endDate;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trainingClass")
     private List<Registration> registrations;
 
     public TrainingClass(String name, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public void addRegistration(Registration registration) {
+        if (registrations == null) {
+            registrations = new ArrayList<>();
+        }
+        registrations.add(registration);
+        registration.setTrainingClass(this);
     }
 
 }
