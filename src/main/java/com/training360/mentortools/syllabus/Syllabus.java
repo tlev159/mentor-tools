@@ -19,6 +19,7 @@ public class Syllabus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OrderBy
     private String name;
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "syllabus")
