@@ -82,3 +82,11 @@ GET http://localhost:8080/api/syllabus
 Accept: application/json
 
 ###
+GET http://localhost:8080/api/syllabus?name=jpa
+Accept: application/json
+
+###
+GET http://localhost:8080/api/syllabus?id=2
+Accept: application/json
+
+###
