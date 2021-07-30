@@ -36,12 +36,12 @@ public class Registration {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "students_id")
-    private Student students;
+    private Student student;
 
-    public Registration(RegistrationsStatus status, TrainingClass trainingClass, Student students) {
+    public Registration(RegistrationsStatus status, TrainingClass trainingClass, Student student) {
         this.status = status;
         this.trainingClass = trainingClass;
-        this.students = students;
+        this.student = student;
     }
 
 }
