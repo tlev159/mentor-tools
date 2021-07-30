@@ -42,6 +42,14 @@ public class TrainingClass {
         this.endDate = endDate;
     }
 
+    public TrainingClass(String name, LocalDate startDate, LocalDate endDate, List<Registration> registrations, Syllabus syllabus) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.registrations = registrations;
+        this.syllabus = syllabus;
+    }
+
     public void addRegistration(Registration registration) {
         if (registrations == null) {
             registrations = new ArrayList<>();

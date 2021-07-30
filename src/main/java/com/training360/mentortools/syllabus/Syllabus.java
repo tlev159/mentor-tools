@@ -28,6 +28,11 @@ public class Syllabus {
         this.name = name;
     }
 
+    public Syllabus(String name, List<TrainingClass> trainingClasses) {
+        this.name = name;
+        this.trainingClasses = trainingClasses;
+    }
+
     public void addTrainingClass(TrainingClass trainingClass) {
         if (trainingClasses == null) {
             trainingClasses = new ArrayList<>();

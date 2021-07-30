@@ -6,6 +6,7 @@ import com.training360.mentortools.trainingClass.TrainingClassRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -16,6 +17,7 @@ public class SyllabusService {
 
     private TrainingClassRepository trainingClassRepository;
 
+    @Transactional
     public SyllabusDTO createSyllabus(CreateSyllabusCommand command) {
         Syllabus syllabus = new Syllabus(command.getName());
         TrainingClass trainingClass = trainingClassRepository.findById(command.getTrainingClassId()).orElseThrow(() -> new TrainingClassNotFoundException("Training class not found!!"));
