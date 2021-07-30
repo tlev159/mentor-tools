@@ -17,3 +17,11 @@ GET http://localhost:8080/api/5
 Accept: application/json
 
 ###
+
+POST http://localhost:8080/api/trainingclasses/2/registrations
+Content-Type: application/json
+
+{
+  "studentId": 2
+
+}
