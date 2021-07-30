@@ -1,13 +1,11 @@
 package com.training360.mentortools.syllabus;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -21,5 +19,9 @@ public class SyllabusController {
         return service.createSyllabus(command);
     }
 
+    @GetMapping
+    public List<SyllabusDTO> listAllSyllabus() {
+        return service.listAllSyllabus();
+    }
 
 }

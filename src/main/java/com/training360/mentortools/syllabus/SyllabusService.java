@@ -8,6 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class SyllabusService {
@@ -26,4 +29,7 @@ public class SyllabusService {
         return modelMapper.map(syllabus, SyllabusDTO.class);
     }
 
+    public List<SyllabusDTO> listAllSyllabus() {
+        return repository.findAll().stream().map(s -> modelMapper.map(s, SyllabusDTO.class)).collect(Collectors.toList());
+    }
 }
