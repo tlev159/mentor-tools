@@ -22,4 +22,10 @@ public class RegistrationsController {
         return service.listAllRegistrationOfATrainingClass(id);
     }
 
+    @GetMapping("/students/{id}/registrations")
+    public List<StudentsRegistrationListDTO> listAllRegistrationOfAStudent(@PathVariable("id") long id) {
+        return service.listAllRegistrationOfAStudent(id);
+    }
+
+
 }

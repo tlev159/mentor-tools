@@ -40,7 +40,9 @@ public class RegistrationsService {
 
     public List<RegistrationListDTO> listAllRegistrationOfATrainingClass(@Param("id") long id) {
         return repository.findRegisteredStudentsInATrainingClass(id);
-//        List<RegistrationList> registrationLists = repository.findRegisteredStudentsInATrainingClass(id);
-//        return registrationLists.stream().map(r -> modelMapper.map(r, RegistrationListDTO.class)).collect(Collectors.toList());
+    }
+
+    public List<StudentsRegistrationListDTO> listAllRegistrationOfAStudent(long id) {
+        return repository.findAllRegistrationsOfAStudent(id);
     }
 }
