@@ -1,5 +1,6 @@
 package com.training360.mentortools.trainingClass;
 
+import com.training360.mentortools.registration.CreateRegistrationCommand;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -55,7 +56,6 @@ public class TrainingClassController {
     public void deleteTrainingClassById(@PathVariable("id") long id) {
         service.deleteTrainingClassById(id);
     }
-
 
     @ExceptionHandler(TrainingClassNotFoundException.class)
     public ResponseEntity<Problem> handleNotFound(TrainingClassNotFoundException tcnfe) {

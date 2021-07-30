@@ -1,5 +1,9 @@
 package com.training360.mentortools.trainingClass;
 
+import com.training360.mentortools.registration.CreateRegistrationCommand;
+import com.training360.mentortools.student.Student;
+import com.training360.mentortools.student.StudentNotFoundException;
+import com.training360.mentortools.student.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,7 @@ public class TrainingClassService {
     private ModelMapper modelMapper;
 
     private TrainingClassRepository repository;
+    private StudentRepository studentRepository;
 
     public TrainingClassDTO createTrainingClass(CreateTrainingClassCommand command) {
         TrainingClass trainingClass = new TrainingClass(command.getName(), command.getStartDate(), command.getEndDate());
@@ -45,4 +50,5 @@ public class TrainingClassService {
     public void deleteTrainingClassById(long id) {
         repository.deleteById(id);
     }
+
 }
