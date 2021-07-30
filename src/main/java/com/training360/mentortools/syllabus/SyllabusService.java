@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,7 +30,10 @@ public class SyllabusService {
         return modelMapper.map(syllabus, SyllabusDTO.class);
     }
 
-    public List<SyllabusDTO> listAllSyllabus() {
-        return repository.findAll().stream().map(s -> modelMapper.map(s, SyllabusDTO.class)).collect(Collectors.toList());
+    public List<SyllabusDTO> listAllSyllabus(Optional<Long> id, Optional<String> name) {
+        return repository.findAll().stream()
+                .filter(s -> id.isEmpty() || s.getId() == id.get())
+                .filter(s -> name.isEmpty() || s.getName().equalsIgnoreCase(name.get()))
+                .map(s -> modelMapper.map(s, SyllabusDTO.class)).collect(Collectors.toList());
     }
 }
