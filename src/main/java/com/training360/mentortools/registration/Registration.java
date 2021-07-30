@@ -35,7 +35,7 @@ public class Registration {
     private TrainingClass trainingClass;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "students_id")
+    @JoinColumn(name = "student_id")
     private Student student;
 
     public Registration(RegistrationsStatus status, TrainingClass trainingClass, Student student) {

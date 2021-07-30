@@ -33,7 +33,7 @@ public class Student {
     private String description;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "students")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "student")
     private List<Registration> registrations;
 
     public Student(String name, String email, String gitUsername, String description) {

@@ -14,6 +14,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class RegistrationsService {
@@ -33,5 +36,11 @@ public class RegistrationsService {
         trainingClass.addRegistration(registration);
         student.addRegistration(registration);
         return modelMapper.map(registration, RegistrationDto.class);
+    }
+
+    public List<RegistrationListDTO> listAllRegistrationOfATrainingClass(@Param("id") long id) {
+        return repository.findRegisteredStudentsInATrainingClass(id);
+//        List<RegistrationList> registrationLists = repository.findRegisteredStudentsInATrainingClass(id);
+//        return registrationLists.stream().map(r -> modelMapper.map(r, RegistrationListDTO.class)).collect(Collectors.toList());
     }
 }
