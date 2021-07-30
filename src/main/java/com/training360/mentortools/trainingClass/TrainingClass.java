@@ -2,6 +2,7 @@ package com.training360.mentortools.trainingClass;
 
 import com.training360.mentortools.registration.Registration;
 import com.training360.mentortools.student.Student;
+import com.training360.mentortools.syllabus.Syllabus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,9 @@ public class TrainingClass {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trainingClass")
     private List<Registration> registrations;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Syllabus syllabus;
 
     public TrainingClass(String name, LocalDate startDate, LocalDate endDate) {
         this.name = name;
