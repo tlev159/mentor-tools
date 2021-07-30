@@ -37,6 +37,11 @@ public class SyllabusController {
         return service.updateSyllabus(id, command);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteSyllabusById(@PathVariable("id") long id) {
+        service.deleteSyllabusById(id);
+    }
+
     @ExceptionHandler(SyllabusNotFoundException.class)
     public ResponseEntity<Problem> handleNotFound(SyllabusNotFoundException snfe) {
         Problem problem = Problem.builder()

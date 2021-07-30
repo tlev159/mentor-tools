@@ -96,3 +96,8 @@ Content-Type: application/json
 {
   "name": "Spring Boot - JPA Data"
 }
+###
+DELETE http://localhost:8080/api/syllabus/1
+Accept: application/json
+
+###

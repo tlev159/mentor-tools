@@ -44,4 +44,9 @@ public class SyllabusService {
         return modelMapper.map(syllabus, SyllabusDTO.class);
     }
 
+    public void deleteSyllabusById(long id) {
+        TrainingClass trainingClass = trainingClassRepository.findBySyllabusId(id);
+        trainingClass.setSyllabus(null);
+        repository.deleteById(id);
+    }
 }

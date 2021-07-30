@@ -21,7 +21,7 @@ public class Syllabus {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "syllabus")
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "syllabus")
     private List<TrainingClass> trainingClasses;
 
     public Syllabus(String name) {
