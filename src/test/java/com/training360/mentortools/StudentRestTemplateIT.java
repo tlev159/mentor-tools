@@ -3,7 +3,6 @@ package com.training360.mentortools;
 import com.training360.mentortools.student.CreateStudentCommand;
 import com.training360.mentortools.student.StudentDTO;
 import com.training360.mentortools.student.UpdateStudentCommand;
-import com.training360.mentortools.trainingClass.CreateTrainingClassCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
