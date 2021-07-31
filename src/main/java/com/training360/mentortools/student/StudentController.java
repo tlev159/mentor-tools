@@ -44,5 +44,9 @@ public class StudentController {
         service.deleteStudentById(id);
     }
 
+    @DeleteMapping
+    public void deleteAllStudent() {
+        service.deleteAllStudent();
+    }
 
 }
