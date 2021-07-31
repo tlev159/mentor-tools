@@ -31,11 +31,16 @@ public class RegistrationsService {
     public RegistrationDto createRegistrationForStudentToATrainingClass(long id, CreateRegistrationCommand command) {
         TrainingClass trainingClass = trainingClassRepository.findById(id).orElseThrow(() -> new TrainingClassNotFoundException("Training class not found!"));
         Student student = studentRepository.findById(command.getStudentId()).orElseThrow(() -> new StudentNotFoundException("Student not found!"));
-        Registration registration = new Registration(RegistrationsStatus.ACTIVE, trainingClass, student);
-        repository.save(registration);
-        trainingClass.addRegistration(registration);
-        student.addRegistration(registration);
-        return modelMapper.map(registration, RegistrationDto.class);
+        List<RegistrationListDTO> registrationForGivenTrainingClass = repository.findRegisteredStudentsInATrainingClass(id);
+        if (registrationForGivenTrainingClass.stream()
+                .filter(r -> r.getId() == student.getId()).count() != 0) {
+            new RegistrationInTrainingClassForStudentExistsException("Student cannot register twice into the same training class!");
+        }
+            Registration registration = new Registration(RegistrationsStatus.ACTIVE, trainingClass, student);
+            repository.save(registration);
+            trainingClass.addRegistration(registration);
+            student.addRegistration(registration);
+            return modelMapper.map(registration, RegistrationDto.class);
     }
 
     public List<RegistrationListDTO> listAllRegistrationOfATrainingClass(@Param("id") long id) {
