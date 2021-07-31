@@ -14,7 +14,9 @@ import org.zalando.problem.Status;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -32,10 +34,10 @@ public class TrainingClassController {
     }
 
     @GetMapping
-    @Operation(summary = "List all classes", description = "List all classes")
+    @Operation(summary = "List classes", description = "List classes")
     @ApiResponse(responseCode = "404", description = "Classes not found!")
-    public List<TrainingClassDTO> listAllClasses() {
-        return service.listAllClasses();
+    public List<TrainingClassDTO> listAllClasses(@RequestParam Optional<String> name, @RequestParam Optional<LocalDate> startDate, @RequestParam Optional<LocalDate> endDate) {
+        return service.listAllClasses(name, startDate, endDate);
     }
 
     @GetMapping("/{id}")

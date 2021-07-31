@@ -8,8 +8,11 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -27,8 +30,11 @@ public class TrainingClassService {
         return modelMapper.map(trainingClass, TrainingClassDTO.class);
     }
 
-    public List<TrainingClassDTO> listAllClasses() {
+    public List<TrainingClassDTO> listAllClasses(Optional<String> name, Optional<LocalDate> startDate, Optional<LocalDate> endDate) {
         return repository.findAll().stream()
+                .filter(c -> name.isEmpty() || c.getName().equalsIgnoreCase(name.get()))
+                .filter(c -> startDate.isEmpty()|| c.getStartDate().isAfter(startDate.get()))
+                .filter(c -> endDate.isEmpty() || c.getEndDate().isAfter(endDate.get()))
                 .map(c -> modelMapper.map(c, TrainingClassDTO.class))
                 .collect(Collectors.toList());
     }
