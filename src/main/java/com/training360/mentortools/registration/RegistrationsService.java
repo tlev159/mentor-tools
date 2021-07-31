@@ -45,4 +45,11 @@ public class RegistrationsService {
     public List<StudentsRegistrationListDTO> listAllRegistrationOfAStudent(long id) {
         return repository.findAllRegistrationsOfAStudent(id);
     }
+
+    @Transactional
+    public RegistrationDto updateRegistrationsStatus(long id, UpdateRegistrationsStatusCommand command) {
+        Registration registration = repository.getById(id);
+        registration.setStatus(command.getStatus());
+        return modelMapper.map(registration, RegistrationDto.class);
+    }
 }

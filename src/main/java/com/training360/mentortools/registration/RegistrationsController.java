@@ -27,5 +27,9 @@ public class RegistrationsController {
         return service.listAllRegistrationOfAStudent(id);
     }
 
+    @PutMapping("/registrations/{id}")
+    public RegistrationDto updateRegistrationsStatus(@PathVariable("id") long id, @RequestParam UpdateRegistrationsStatusCommand command) {
+        return service.updateRegistrationsStatus(id, command);
+    }
 
 }
