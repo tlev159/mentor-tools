@@ -6,21 +6,22 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateStudentCommand {
 
-    @NotBlank
+    @NotEmpty
     @Column(nullable = false, length = 255)
     private String name;
 
-    @NotBlank
+    @NotEmpty
     @Column(nullable = false, length = 255)
     private String email;
 
-    @NotBlank
+    @NotEmpty
     @Column(nullable = false, length = 255)
     private String gitUsername;
 
