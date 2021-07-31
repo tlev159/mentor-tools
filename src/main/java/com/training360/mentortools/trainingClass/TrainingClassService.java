@@ -1,14 +1,10 @@
 package com.training360.mentortools.trainingClass;
 
-import com.training360.mentortools.registration.CreateRegistrationCommand;
-import com.training360.mentortools.student.Student;
-import com.training360.mentortools.student.StudentNotFoundException;
 import com.training360.mentortools.student.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,7 +18,6 @@ public class TrainingClassService {
     private ModelMapper modelMapper;
 
     private TrainingClassRepository repository;
-    private StudentRepository studentRepository;
 
     public TrainingClassDTO createTrainingClass(CreateTrainingClassCommand command) {
         TrainingClass trainingClass = new TrainingClass(command.getName(), command.getStartDate(), command.getEndDate());
@@ -39,9 +34,9 @@ public class TrainingClassService {
                 .collect(Collectors.toList());
     }
 
-    public TrainingClassDTO findClass(long id) {
-        return modelMapper.map(repository.findById(id)
-                .orElseThrow(() -> new TrainingClassNotFoundException("Cannot find Class!")), TrainingClassDTO.class);
+    public TrainingClassDTO findClassById(Long id) {
+        TrainingClass trainingClass = repository.findById(id).orElseThrow(() -> new TrainingClassNotFoundException("Class not found!"));
+        return modelMapper.map(trainingClass, TrainingClassDTO.class);
     }
 
     @Transactional
@@ -55,6 +50,10 @@ public class TrainingClassService {
 
     public void deleteTrainingClassById(long id) {
         repository.deleteById(id);
+    }
+
+    public void deleteAllTrainingClass() {
+        repository.deleteAll();
     }
 
 }

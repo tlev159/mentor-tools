@@ -1,6 +1,5 @@
 package com.training360.mentortools.trainingClass;
 
-import com.training360.mentortools.registration.CreateRegistrationCommand;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +19,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/trainingclass")
 @Tag(name = "Training 360 mentor helping app")
 public class TrainingClassController {
 
@@ -42,21 +41,28 @@ public class TrainingClassController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Gives back a Class with a given id", description = "Gives back a Class with a given id")
-    public TrainingClassDTO findClassWithName(@PathVariable("id") long id) {
-        return service.findClass(id);
+    @ApiResponse(responseCode = "404", description = "Classes not found!")
+    public TrainingClassDTO findClassById(@PathVariable("id") long id) {
+        return service.findClassById(id);
     }
 
-    @PutMapping("/trainingclass/{id}")
+    @PutMapping("/{id}")
     @Operation(summary = "Update training class", description = "Update training class")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ApiResponse(responseCode = "304", description = "Classes not found!")
     public TrainingClassDTO updateTrainingClass(@PathVariable("id") long id, @Valid @RequestBody UpdateTrainingClassCommand command) {
         return service.updateTrainingClass(id, command);
     }
 
-    @DeleteMapping("/trainingclass/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Delete training class by id", description = "Delete training class by id")
     public void deleteTrainingClassById(@PathVariable("id") long id) {
         service.deleteTrainingClassById(id);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAllTrainingClass() {
+        service.deleteAllTrainingClass();
     }
 
     @ExceptionHandler(TrainingClassNotFoundException.class)
