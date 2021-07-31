@@ -22,7 +22,7 @@ public class Syllabus {
     @OrderBy
     private String name;
 
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "syllabus")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "syllabus")
     private List<TrainingClass> trainingClasses;
 
     public Syllabus(String name) {
