@@ -16,7 +16,6 @@ public class CreateSyllabusCommand {
     @Column(nullable = false)
     private String name;
 
-    @NotEmpty
     @Column(nullable = false)
     private Long trainingClassId;
 
