@@ -25,24 +25,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Sql(statements = "delete from `mentor-tools`.`training_classes`")
 public class TrainingClassRestTemplateIT {
 
+    private final String URL_FOR_QUERY = "/api/trainingclass";
+
     @Autowired
     TestRestTemplate template;
 
     @BeforeEach
     void init() {
-        template.delete("/api/trainingclass");
+        template.delete(URL_FOR_QUERY);
     }
 
     @Test
     void createTwoThenFindClassByName() {
 
-        template.postForObject("/api/trainingclass", new CreateTrainingClassCommand("First Test Class", LocalDate.of(2021, 01, 01), LocalDate.of(2021, 03, 01)), TrainingClassDTO.class);
+        template.postForObject(URL_FOR_QUERY, new CreateTrainingClassCommand("First Test Class", LocalDate.of(2021, 01, 01), LocalDate.of(2021, 03, 01)), TrainingClassDTO.class);
 
-        template.postForObject("/api/trainingclass", new CreateTrainingClassCommand("Second Test Class", LocalDate.of(2021, 02, 02), LocalDate.of(2021, 04, 04)), TrainingClassDTO.class);
+        template.postForObject(URL_FOR_QUERY, new CreateTrainingClassCommand("Second Test Class", LocalDate.of(2021, 02, 02), LocalDate.of(2021, 04, 04)), TrainingClassDTO.class);
 
         String searchedTrainingClassName = "Second Test Class";
 
-        List<TrainingClassDTO> trainingClassDTOs = template.exchange("/api/trainingclass?name=" + searchedTrainingClassName,
+        List<TrainingClassDTO> trainingClassDTOs = template.exchange(URL_FOR_QUERY + "?name=" + searchedTrainingClassName,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<TrainingClassDTO>>() {
@@ -58,14 +60,14 @@ public class TrainingClassRestTemplateIT {
     void createThenListClass() {
 
         TrainingClassDTO trainingClassDTO =
-                template.postForObject("/api/trainingclass", new CreateTrainingClassCommand("First Test Class", LocalDate.of(2021, 01, 01), LocalDate.of(2021, 03, 01)), TrainingClassDTO.class);
+                template.postForObject(URL_FOR_QUERY, new CreateTrainingClassCommand("First Test Class", LocalDate.of(2021, 01, 01), LocalDate.of(2021, 03, 01)), TrainingClassDTO.class);
 
         assertThat(trainingClassDTO).extracting(TrainingClassDTO::getName)
                 .isEqualTo("First Test Class");
 
-        template.postForObject("/api/trainingclass", new CreateTrainingClassCommand("Second Test Class", LocalDate.of(2021, 02, 02), LocalDate.of(2021, 04, 04)), TrainingClassDTO.class);
+        template.postForObject(URL_FOR_QUERY, new CreateTrainingClassCommand("Second Test Class", LocalDate.of(2021, 02, 02), LocalDate.of(2021, 04, 04)), TrainingClassDTO.class);
 
-        List<TrainingClassDTO> trainingClassDTOS = template.exchange("/api/trainingclass",
+        List<TrainingClassDTO> trainingClassDTOS = template.exchange(URL_FOR_QUERY,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<TrainingClassDTO>>() {
@@ -81,13 +83,13 @@ public class TrainingClassRestTemplateIT {
     void updateThenFindClassById() {
 
         TrainingClassDTO trainingClassDTO =
-                template.postForObject("/api/trainingclass", new CreateTrainingClassCommand("First Test Class", LocalDate.of(2021, 01, 01), LocalDate.of(2021, 03, 01)), TrainingClassDTO.class);
+                template.postForObject(URL_FOR_QUERY, new CreateTrainingClassCommand("First Test Class", LocalDate.of(2021, 01, 01), LocalDate.of(2021, 03, 01)), TrainingClassDTO.class);
 
         long id = trainingClassDTO.getId();
 
-        template.put("/api/trainingclass/" + id, new UpdateTrainingClassCommand("First Test2 Class", LocalDate.of(2021, 02, 02), LocalDate.of(2021, 04, 04)), TrainingClassDTO.class);
+        template.put(URL_FOR_QUERY + "/" + id, new UpdateTrainingClassCommand("First Test2 Class", LocalDate.of(2021, 02, 02), LocalDate.of(2021, 04, 04)), TrainingClassDTO.class);
 
-        TrainingClassDTO loadedClass = template.getForObject("/api/trainingclass/" + id,
+        TrainingClassDTO loadedClass = template.getForObject(URL_FOR_QUERY + "/" + id,
                 TrainingClassDTO.class);
 
         assertThat(loadedClass)
@@ -100,15 +102,15 @@ public class TrainingClassRestTemplateIT {
     void deleteThenNotFindClassById() {
 
         TrainingClassDTO trainingClassDTO =
-                template.postForObject("/api/trainingclass", new CreateTrainingClassCommand("First Test Class", LocalDate.of(2021, 01, 01), LocalDate.of(2021, 03, 01)), TrainingClassDTO.class);
+                template.postForObject(URL_FOR_QUERY, new CreateTrainingClassCommand("First Test Class", LocalDate.of(2021, 01, 01), LocalDate.of(2021, 03, 01)), TrainingClassDTO.class);
 
         long id = trainingClassDTO.getId();
 
-        template.postForObject("/api/trainingclass", new CreateTrainingClassCommand("Second Test Class", LocalDate.of(2021, 02, 02), LocalDate.of(2021, 04, 04)), TrainingClassDTO.class);
+        template.postForObject(URL_FOR_QUERY, new CreateTrainingClassCommand("Second Test Class", LocalDate.of(2021, 02, 02), LocalDate.of(2021, 04, 04)), TrainingClassDTO.class);
 
-        template.delete("/api/trainingclass/" + id);
+        template.delete(URL_FOR_QUERY + "/" + id);
 
-        List<TrainingClassDTO> trainingClassDTOS = template.exchange("/api/trainingclass",
+        List<TrainingClassDTO> trainingClassDTOS = template.exchange(URL_FOR_QUERY,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<TrainingClassDTO>>() {
@@ -123,7 +125,7 @@ public class TrainingClassRestTemplateIT {
 
     @Test
     void createTrainingClassWithEmptyClassName() {
-        Problem result = template.postForObject("/api/trainingclass",
+        Problem result = template.postForObject(URL_FOR_QUERY,
                 new CreateTrainingClassCommand("", LocalDate.of(2021, 5, 5), LocalDate.of(2021, 8, 9)), Problem.class);
 
         assertEquals(Status.BAD_REQUEST, result.getStatus());
@@ -131,7 +133,7 @@ public class TrainingClassRestTemplateIT {
 
     @Test
     void createTrainingClassWithEndDateBeforeStartDate() {
-        Problem result = template.postForObject("/api/trainingclass",
+        Problem result = template.postForObject(URL_FOR_QUERY,
                 new CreateTrainingClassCommand("Junior Java", LocalDate.of(2021, 5, 5), LocalDate.of(2021, 1, 1)), Problem.class);
 
         assertEquals(Status.BAD_REQUEST, result.getStatus());
@@ -140,7 +142,7 @@ public class TrainingClassRestTemplateIT {
     @Test
     void NotFoundTrainingClassException4xx() {
 
-        Problem result = template.getForObject("/api/trainingclass/99", Problem.class);
+        Problem result = template.getForObject(URL_FOR_QUERY +"/99", Problem.class);
 
         assertEquals(Status.NOT_FOUND, result.getStatus());
         assertEquals(URI.create("training_class/training-class-not-found"), result.getType());
