@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class SyllabusController {
     private SyllabusService service;
 
     @PostMapping
-    public SyllabusDTO createSyllabus(@RequestBody CreateSyllabusCommand command) {
+    public SyllabusDTO createSyllabus(@Valid @RequestBody CreateSyllabusCommand command) {
         return service.createSyllabus(command);
     }
 
@@ -35,7 +36,7 @@ public class SyllabusController {
     }
 
     @PutMapping("/{id}")
-    public SyllabusDTO updateSyllabus(@PathVariable("id") Long id, @RequestBody UpdateSyllabusCommand command) {
+    public SyllabusDTO updateSyllabus(@PathVariable("id") Long id, @Valid @RequestBody UpdateSyllabusCommand command) {
         return service.updateSyllabus(id, command);
     }
 
