@@ -1,6 +1,5 @@
 package com.training360.mentortools.syllabus;
 
-import com.training360.mentortools.trainingClass.TrainingClassNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +24,11 @@ public class SyllabusController {
         return service.createSyllabus(command);
     }
 
+    @GetMapping("/{id}")
+    public SyllabusDTO findSyllabusById(@PathVariable("id") long id) {
+        return service.findSyllabusById(id);
+    }
+
     @GetMapping
     public List<SyllabusDTO> listAllSyllabus(@RequestParam Optional<Long> id, @RequestParam Optional<String> name) {
         return service.listAllSyllabus(id, name);
@@ -40,6 +42,11 @@ public class SyllabusController {
     @DeleteMapping("/{id}")
     public void deleteSyllabusById(@PathVariable("id") long id) {
         service.deleteSyllabusById(id);
+    }
+
+    @DeleteMapping
+    public void deleteAllSyllabus() {
+        service.deleteAllSyllabus();
     }
 
     @ExceptionHandler(SyllabusNotFoundException.class)

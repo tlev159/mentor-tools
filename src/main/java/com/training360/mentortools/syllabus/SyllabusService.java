@@ -30,6 +30,11 @@ public class SyllabusService {
         return modelMapper.map(syllabus, SyllabusDTO.class);
     }
 
+    public SyllabusDTO findSyllabusById(long id) {
+        Syllabus syllabus = repository.findById(id).orElseThrow(() -> new SyllabusNotFoundException("Syllabus not found!"));
+        return modelMapper.map(syllabus, SyllabusDTO.class);
+    }
+
     public List<SyllabusDTO> listAllSyllabus(Optional<Long> id, Optional<String> name) {
         return repository.findAll().stream()
                 .filter(s -> id.isEmpty() || s.getId() == id.get())
@@ -49,4 +54,9 @@ public class SyllabusService {
         trainingClass.setSyllabus(null);
         repository.deleteById(id);
     }
+
+    public void deleteAllSyllabus() {
+        repository.deleteAll();
+    }
+
 }
